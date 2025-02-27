@@ -6,6 +6,7 @@ namespace Lightit\Backoffice\Airlines\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 // use Lightit\Backoffice\Flights\Domain\Models\Flight;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 
 /**
@@ -34,7 +35,7 @@ class Airline extends Model
 {
     protected $fillable = ['name', 'description'];
 
-    public function cities()
+    public function cities(): HasMany
     {
         return $this->hasMany(City::class);
     }
