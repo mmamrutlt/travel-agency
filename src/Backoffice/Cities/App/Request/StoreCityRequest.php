@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Lightit\Backoffice\Cities\App\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Lightit\Backoffice\Cities\Domain\DataTransferObjects\CityDTO;
+use Lightit\Backoffice\Cities\Domain\Models\City;
 
 class StoreCityRequest extends FormRequest
 {
@@ -14,7 +16,7 @@ class StoreCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            self::NAME => 'required|string|unique:cities,name|max:255',
+            self::NAME => ['required', 'string', Rule::unique((new City())->getTable()), 'max:255'],
         ];
     }
 

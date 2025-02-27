@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Lightit\Backoffice\Airlines\Domain\Models\Airline;
+
+/**
+ * @extends Factory<\Lightit\Backoffice\Airlines\Domain\Models\Airline>
+ */
+class AirlineFactory extends Factory
+{
+    protected $model = Airline::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->company(),
+            'description' => fake()->sentence(),
+        ];
+    }
+}
