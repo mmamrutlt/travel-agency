@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Lightit\Backoffice\Airlines\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 // use Lightit\Backoffice\Flights\Domain\Models\Flight;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 
 /**
@@ -35,8 +35,8 @@ class Airline extends Model
 {
     protected $fillable = ['name', 'description'];
 
-    public function cities(): HasMany
+    public function cities(): BelongsToMany
     {
-        return $this->hasMany(City::class);
+        return $this->belongsToMany(City::class, 'airline_city');
     }
 }

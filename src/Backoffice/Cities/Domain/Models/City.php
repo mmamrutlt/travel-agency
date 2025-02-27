@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Lightit\Backoffice\Cities\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Lightit\Backoffice\Airlines\Domain\Models\Airline;
 
 /**
  * @property int                             $id
@@ -20,19 +22,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|City whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|City whereUpdatedAt($value)
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Airline> $airlines
+ * @property-read int|null $airlines_count
+ *
  * @mixin \Eloquent
  */
 class City extends Model
 {
     protected $fillable = ['name'];
 
-    // public function incomingFlights()
-    // {
-    //     return $this->hasMany(Flight::class, 'destination_city_id');
-    // }
-
-    // public function outgoingFlights()
-    // {
-    //     return $this->hasMany(Flight::class, 'origin_city_id');
-    // }
+    public function airlines(): BelongsToMany
+    {
+        return $this->belongsToMany(Airline::class, 'airline_city');
+    }
 }
