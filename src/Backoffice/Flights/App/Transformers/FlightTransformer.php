@@ -10,7 +10,7 @@ use Lightit\Backoffice\Flights\Domain\Models\Flight;
 class FlightTransformer extends Transformer
 {
     /**
-     * @return array{id: int, name: string}
+     * @return array{id: int, departure_date: string, arrival_date: string, departure_city_id: int, arrival_city_id: int, airline_id: int}
      */
     public function transform(Flight $flight): array
     {

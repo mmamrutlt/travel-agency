@@ -23,13 +23,6 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
  * @property string                          $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline whereUpdatedAt($value)
- *
  * @property-read Airline|null $airline
  * @property-read City|null $arrivalCity
  * @property-read City|null $departureCity
@@ -58,22 +51,33 @@ class Flight extends Model
         'airline_id',
     ];
 
+    /**
+     * @return BelongsTo<City, $this>
+    */
     public function departureCity(): BelongsTo
     {
         return $this->belongsTo(City::class, 'departure_city_id');
     }
 
+    /**
+     * @return BelongsTo<City, $this>
+    */
     public function arrivalCity(): BelongsTo
     {
         return $this->belongsTo(City::class, 'arrival_city_id');
     }
 
-    /** @return BelongsToMany<City, Airline> */
+    /**
+     * @return BelongsToMany<City, $this>
+    */
     public function cities(): BelongsToMany
     {
         return $this->belongsToMany(City::class);
     }
 
+    /**
+     * @return BelongsTo<Airline, $this>
+    */
     public function airline(): BelongsTo
     {
         return $this->belongsTo(Airline::class);

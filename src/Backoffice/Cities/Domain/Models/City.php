@@ -37,19 +37,25 @@ class City extends Model
 {
     protected $fillable = ['name'];
 
-    /** @return BelongsToMany<Airline, City> */
+    /**
+     * @return BelongsToMany<Airline, $this>
+    */
     public function airlines(): BelongsToMany
     {
         return $this->belongsToMany(Airline::class);
     }
 
-    /** @return HasMany<Flight> */
+    /**
+     * @return HasMany<Flight, $this>
+    */
     public function departureFlights(): HasMany
     {
         return $this->hasMany(Flight::class, 'departure_city_id');
     }
 
-    /** @return HasMany<Flight> */
+    /**
+     * @return HasMany<Flight, $this>
+    */
     public function arrivalFlights(): HasMany
     {
         return $this->hasMany(Flight::class, 'arrival_city_id');
