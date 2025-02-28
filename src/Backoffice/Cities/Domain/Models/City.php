@@ -6,7 +6,9 @@ namespace Lightit\Backoffice\Cities\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lightit\Backoffice\Airlines\Domain\Models\Airline;
+use Lightit\Backoffice\Flights\Domain\Models\Flight;
 
 /**
  * @property int                             $id
@@ -24,6 +26,10 @@ use Lightit\Backoffice\Airlines\Domain\Models\Airline;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Airline> $airlines
  * @property-read int|null $airlines_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Flight> $departureFlights
+ * @property-read int|null $departure_flights_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Flight> $arrivalFlights
+ * @property-read int|null $arrival_flights_count
  *
  * @mixin \Eloquent
  */
@@ -35,5 +41,17 @@ class City extends Model
     public function airlines(): BelongsToMany
     {
         return $this->belongsToMany(Airline::class);
+    }
+
+    /** @return HasMany<Flight> */
+    public function departureFlights(): HasMany
+    {
+        return $this->hasMany(Flight::class, 'departure_city_id');
+    }
+
+    /** @return HasMany<Flight> */
+    public function arrivalFlights(): HasMany
+    {
+        return $this->hasMany(Flight::class, 'arrival_city_id');
     }
 }

@@ -14,6 +14,10 @@ use Lightit\Backoffice\Airlines\App\Controllers\StoreAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\ListAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\GetAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\DeleteAirlineController;
+use Lightit\Backoffice\Flights\App\Controllers\StoreFlightController;
+use Lightit\Backoffice\Flights\App\Controllers\ListFlightController;
+use Lightit\Backoffice\Flights\App\Controllers\GetFlightController;
+use Lightit\Backoffice\Flights\App\Controllers\DeleteFlightController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,4 +63,13 @@ Route::prefix('airlines')
         Route::get('/', ListAirlineController::class);
         Route::get('/{airline}', GetAirlineController::class);
         Route::delete('/{airline}', DeleteAirlineController::class);
+    });
+
+Route::prefix('flights')
+    ->middleware([])
+    ->group(static function () {
+        Route::post('/', StoreFlightController::class);
+        Route::get('/', ListFlightController::class);
+        Route::get('/{flight}', GetFlightController::class);
+        Route::delete('/{flight}', DeleteFlightController::class);
     });
