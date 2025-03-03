@@ -4,21 +4,17 @@ declare(strict_types=1);
 
 namespace Lightit\Backoffice\Cities\Domain\Actions;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ListCityAction
 {
-    /**
-     * @return Collection<int, Model>
-     */
-    public function execute(): Collection
+    public function execute(): LengthAwarePaginator
     {
         return QueryBuilder::for(City::class)
             ->allowedFilters(['name'])
             ->allowedSorts('name')
-            ->get();
+            ->paginate(10);
     }
 }
