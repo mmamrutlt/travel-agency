@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Lightit\Backoffice\Airlines\Domain\Models\Airline;
-use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class ListAirlineAction
 {
@@ -18,17 +16,24 @@ class ListAirlineAction
      */
     public function execute(): LengthAwarePaginator
     {
-        return QueryBuilder::for(Airline::class)
-            ->allowedFilters([
-                'name',
-                AllowedFilter::callback('city', function (Builder $query, $value) {
-                    return $query->whereHas('flights', function (Builder $query) use ($value) {
-                        $query->where('departure_city_id', $value)
-                            ->orWhere('arrival_city_id', $value);
-                    });
-                }),
-            ])
-            ->allowedSorts('name')
-            ->paginate(10);
+        $query = Airline::with(['flights']);
+
+        if (request()->has('filter.name')) {
+            $query->where('name', 'like', '%' . request('filter.name') . '%');
+        }
+
+        if (request()->has('filter.city')) {
+            $query->whereHas('flights', function (Builder $query) {
+                $query->where('departure_city_id', request('filter.city'))
+                    ->orWhere('arrival_city_id', request('filter.city'));
+            });
+        }
+
+        if (request()->has('sort')) {
+            $direction = request('direction', 'asc');
+            $query->orderBy(request('sort'), $direction);
+        }
+
+        return $query->paginate(10);
     }
 }

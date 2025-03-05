@@ -9,6 +9,11 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
 
 class CityTransformer extends Transformer
 {
+    protected $load = [
+        'departureFlights',
+        'arrivalFlights',
+    ];
+
     /**
      * @return array{id: int, name: string}
      */
