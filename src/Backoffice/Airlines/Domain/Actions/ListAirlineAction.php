@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lightit\Backoffice\Airlines\Domain\Actions;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Lightit\Backoffice\Airlines\Domain\Models\Airline;
@@ -20,8 +21,8 @@ class ListAirlineAction
         return QueryBuilder::for(Airline::class)
             ->allowedFilters([
                 'name',
-                AllowedFilter::callback('city', function ($query, $value) {
-                    return $query->whereHas('flights', function ($query) use ($value) {
+                AllowedFilter::callback('city', function (Builder $query, $value) {
+                    return $query->whereHas('flights', function (Builder $query) use ($value) {
                         $query->where('departure_city_id', $value)
                             ->orWhere('arrival_city_id', $value);
                     });
