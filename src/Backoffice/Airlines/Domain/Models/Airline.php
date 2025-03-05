@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Lightit\Backoffice\Airlines\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-// use Lightit\Backoffice\Flights\Domain\Models\Flight;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lightit\Backoffice\Cities\Domain\Models\City;
+use Lightit\Backoffice\Flights\Domain\Models\Flight;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection<int, City> $cities
  * @property-read int|null $cities_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Flight> $flights
+ * @property-read int|null $flights_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline newQuery()
@@ -36,10 +38,10 @@ class Airline extends Model
     protected $fillable = ['name', 'description'];
 
     /**
-     * @return BelongsToMany<City, $this>
+     * @return HasMany<Flight, $this>
     */
-    public function cities(): BelongsToMany
+    public function flights(): HasMany
     {
-        return $this->belongsToMany(City::class);
+        return $this->hasMany(Flight::class);
     }
 }

@@ -7,6 +7,7 @@ namespace Lightit\Backoffice\Airlines\Domain\Actions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Lightit\Backoffice\Airlines\Domain\Models\Airline;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ListAirlineAction
@@ -17,7 +18,15 @@ class ListAirlineAction
     public function execute(): LengthAwarePaginator
     {
         return QueryBuilder::for(Airline::class)
-            ->allowedFilters(['name'])
+            ->allowedFilters([
+                'name',
+                AllowedFilter::callback('city', function ($query, $value) {
+                    return $query->whereHas('flights', function ($query) use ($value) {
+                        $query->where('departure_city_id', $value)
+                            ->orWhere('arrival_city_id', $value);
+                    });
+                }),
+            ])
             ->allowedSorts('name')
             ->paginate(10);
     }

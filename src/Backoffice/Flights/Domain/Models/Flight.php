@@ -38,6 +38,9 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereDepartureCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereDepartureDate($value)
  * @method static \Database\Factories\FlightFactory                    factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereUpdatedAt($value)
  *
  * @mixin \Eloquent
  */
