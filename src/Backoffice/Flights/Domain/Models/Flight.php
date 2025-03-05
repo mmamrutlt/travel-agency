@@ -11,13 +11,13 @@ use Lightit\Backoffice\Airlines\Domain\Models\Airline;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 
 /**
+ * 
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, City> $cities
  * @property-read int|null $cities_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Airline query()
- *
  * @property int                             $id
  * @property string                          $name
  * @property string                          $description
@@ -31,14 +31,15 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
  * @property int    $departure_city_id
  * @property int    $arrival_city_id
  * @property int    $airline_id
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereAirlineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereArrivalCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereArrivalDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereDepartureCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereDepartureDate($value)
  * @method static \Database\Factories\FlightFactory                    factory($count = null, $state = [])
- *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Flight whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Flight extends Model
