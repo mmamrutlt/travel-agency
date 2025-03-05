@@ -40,7 +40,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 Route::prefix('users')
-    ->middleware([])
     ->group(static function () {
         Route::get('/', ListUserController::class);
         Route::get('/{user}', GetUserController::class)->withTrashed();
@@ -49,7 +48,6 @@ Route::prefix('users')
     });
 
 Route::prefix('cities')
-    ->middleware([])
     ->group(static function () {
         Route::post('/', StoreCityController::class);
         Route::get('/', ListCityController::class);
@@ -57,7 +55,6 @@ Route::prefix('cities')
         Route::delete('/{city}', DeleteCityController::class);
     });
 Route::prefix('airlines')
-    ->middleware([])
     ->group(static function () {
         Route::post('/', StoreAirlineController::class);
         Route::get('/', ListAirlineController::class);
@@ -66,7 +63,6 @@ Route::prefix('airlines')
     });
 
 Route::prefix('flights')
-    ->middleware([])
     ->group(static function () {
         Route::post('/', StoreFlightController::class);
         Route::get('/', ListFlightController::class);
