@@ -7,10 +7,11 @@ namespace Lightit\Backoffice\Cities\Domain\Actions;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 use Spatie\QueryBuilder\QueryBuilder;
+
 class ListCityAction
 {
     /**
-     * @return LengthAwarePaginator<City>
+     * @return LengthAwarePaginator<Model>
      */
     public function execute(): LengthAwarePaginator
     {

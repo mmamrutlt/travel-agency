@@ -12,7 +12,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class ListAirlineAction
 {
     /**
-     * @return LengthAwarePaginator<Airline>
+     * @return LengthAwarePaginator<Model>
      */
     public function execute(): LengthAwarePaginator
     {
@@ -24,7 +24,7 @@ class ListAirlineAction
                         $query->where('departure_city_id', $value)
                             ->orWhere('arrival_city_id', $value);
                     });
-                })
+                }),
             ])
             ->allowedSorts(['name'])
             ->with(['flights'])
