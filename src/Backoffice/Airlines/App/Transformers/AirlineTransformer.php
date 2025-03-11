@@ -21,6 +21,7 @@ class AirlineTransformer extends Transformer
         return [
             'id' => $airline->id,
             'name' => $airline->name,
+            'description' => $airline->description,
         ];
     }
 }
