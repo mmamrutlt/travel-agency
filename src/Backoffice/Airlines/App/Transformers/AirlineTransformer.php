@@ -9,6 +9,10 @@ use Lightit\Backoffice\Airlines\Domain\Models\Airline;
 
 class AirlineTransformer extends Transformer
 {
+    protected $load = [
+        'flights',
+    ];
+
     /**
      * @return array{id: int, name: string}
      */
