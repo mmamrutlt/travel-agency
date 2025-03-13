@@ -19,7 +19,7 @@ use Lightit\Backoffice\Flights\App\Controllers\ListFlightController;
 use Lightit\Backoffice\Flights\App\Controllers\GetFlightController;
 use Lightit\Backoffice\Flights\App\Controllers\DeleteFlightController;
 use Lightit\Backoffice\Airlines\App\Controllers\ListAirlineDropdownController;
-
+use Lightit\Backoffice\Cities\App\Controllers\ListCityDropdownController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -52,6 +52,7 @@ Route::prefix('cities')
     ->group(static function () {
         Route::post('/', StoreCityController::class);
         Route::get('/', ListCityController::class);
+        Route::get('/dropdown', ListCityDropdownController::class);
         Route::get('/{city}', GetCityController::class);
         Route::delete('/{city}', DeleteCityController::class);
     });
