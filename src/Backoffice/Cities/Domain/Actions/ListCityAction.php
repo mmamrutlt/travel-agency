@@ -17,8 +17,11 @@ class ListCityAction
     public function execute(): LengthAwarePaginator
     {
         return QueryBuilder::for(City::class)
-            ->allowedFilters(['name'])
-            ->allowedSorts('name')
+            ->allowedFilters([
+                'name',
+            ])
+            ->allowedSorts(['name'])
+            ->with(['departureFlights', 'arrivalFlights'])
             ->paginate(10);
     }
 }

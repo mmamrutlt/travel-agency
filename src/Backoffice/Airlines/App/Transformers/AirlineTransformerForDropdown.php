@@ -7,12 +7,8 @@ namespace Lightit\Backoffice\Airlines\App\Transformers;
 use Flugg\Responder\Transformers\Transformer;
 use Lightit\Backoffice\Airlines\Domain\Models\Airline;
 
-class AirlineTransformer extends Transformer
+class AirlineTransformerForDropdown extends Transformer
 {
-    protected $load = [
-        'flights',
-    ];
-
     /**
      * @return array{id: int, name: string}
      */
@@ -21,7 +17,6 @@ class AirlineTransformer extends Transformer
         return [
             'id' => $airline->id,
             'name' => $airline->name,
-            'description' => $airline->description,
         ];
     }
 }

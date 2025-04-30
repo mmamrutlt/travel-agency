@@ -7,13 +7,8 @@ namespace Lightit\Backoffice\Cities\App\Transformers;
 use Flugg\Responder\Transformers\Transformer;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 
-class CityTransformer extends Transformer
+class CityTransformerForDropdown extends Transformer
 {
-    protected $load = [
-        'departureFlights',
-        'arrivalFlights',
-    ];
-
     /**
      * @return array{id: int, name: string}
      */

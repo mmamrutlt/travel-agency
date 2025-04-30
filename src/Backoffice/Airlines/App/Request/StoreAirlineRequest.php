@@ -19,7 +19,7 @@ class StoreAirlineRequest extends FormRequest
     {
         return [
             self::NAME => ['required', 'string', Rule::unique((new Airline())->getTable()), 'max:255'],
-            self::DESCRIPTION => ['required', 'string', 'max:255'],
+            self::DESCRIPTION => ['string', 'max:255'],
         ];
     }
 
